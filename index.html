@@ -1,0 +1,1162 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Shinya Uogaeshi — undesigned</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Plus+Jakarta+Sans:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gen-interface-jp@0.1.2/all.css">
+<style>
+  html{scroll-padding-top:88px;scroll-behavior:smooth}
+  :root{
+    --ink:#141414;
+    --ink-2:#2a2a2a;
+    --mute:#8a8a8a;
+    --rule:#d9d9d9;
+    --paper:#f6f5f1;
+    --paper-2:#efeee8;
+    --accent: oklch(0.42 0.08 258);
+    --font-en: "Inter";
+    --font-jp: "Gen Interface JP";
+  }
+  /* === カラーパレット === */
+  /* P1: Warm Paper × Ink Blue（現行・温白×インクブルー） */
+  body[data-palette="P1"]{ --ink:#141414; --ink-2:#2a2a2a; --mute:#8a8a8a; --rule:#d9d9d9; --paper:#f6f5f1; --paper-2:#efeee8; --accent: oklch(0.42 0.08 258); }
+  /* P2: Pure Bauhaus — 純白×墨×朱（最小限） */
+  body[data-palette="P2"]{ --ink:#0a0a0a; --ink-2:#1f1f1f; --mute:#8f8f8f; --rule:#e6e6e6; --paper:#ffffff; --paper-2:#f4f4f4; --accent: oklch(0.58 0.18 28); }
+  /* P3: Sumi — 墨とオフブラック、アクセント無し */
+  body[data-palette="P3"]{ --ink:#111111; --ink-2:#2b2b2b; --mute:#8a8680; --rule:#d8d4cb; --paper:#ece9e1; --paper-2:#e3dfd4; --accent: oklch(0.35 0.03 60); }
+  /* P4: Cool Graphite — 冷たいグレースケール×ディープティール */
+  body[data-palette="P4"]{ --ink:#0e1416; --ink-2:#232a2d; --mute:#8a9196; --rule:#d4d8db; --paper:#f1f3f2; --paper-2:#e8ebea; --accent: oklch(0.45 0.06 195); }
+  /* P5: Shironeri — 生成り×インク、アクセントに深緑 */
+  body[data-palette="P5"]{ --ink:#1a1813; --ink-2:#2e2a22; --mute:#938e82; --rule:#dcd7c7; --paper:#faf6ec; --paper-2:#f1ecdc; --accent: oklch(0.38 0.06 150); }
+  /* P6: Inverted — ダーク基調 */
+  body[data-palette="P6"]{ --ink:#f0ede6; --ink-2:#d6d2c9; --mute:#7a766e; --rule:#2a2a28; --paper:#121210; --paper-2:#1a1a18; --accent: oklch(0.72 0.08 80); }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body{
+    font-family:var(--font-en),var(--font-jp),sans-serif;
+    font-weight:300;
+    font-size:17px;
+    line-height:1.7;
+    letter-spacing:0.01em;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+  hr{border:0;border-top:1px solid var(--rule)}
+
+  /* === レイアウト共通 === */
+  .page{max-width:1440px;margin:0 auto;padding:0 48px}
+  @media (max-width:720px){ .page{padding:0 24px} }
+
+  /* === ヘッダ === */
+  .nav{
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+    padding:28px 0;border-bottom:1px solid var(--rule);
+    position:sticky;top:0;background:color-mix(in srgb, var(--paper) 92%, transparent);backdrop-filter:blur(8px);z-index:50;
+  }
+  .nav .brand{display:flex;align-items:baseline;gap:12px}
+  .nav .brand .mark{font-weight:500;letter-spacing:0.02em}
+  .nav .brand .subt{color:var(--mute);font-size:12px;letter-spacing:0.08em;text-transform:uppercase}
+  .nav ul{list-style:none;display:flex;gap:36px;justify-content:center;font-size:13px;letter-spacing:0.04em}
+  .nav ul a{color:var(--ink-2);position:relative;padding-bottom:2px}
+  .nav ul a:hover{color:var(--ink)}
+  .nav ul a.current::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:var(--ink)}
+  .nav .meta{justify-self:end;font-size:12px;color:var(--mute);letter-spacing:0.04em;display:flex;gap:17px;align-items:center}
+  .nav .switch{display:flex;gap:2px;border:1px solid var(--rule);border-radius:999px;padding:3px}
+  .nav .switch button{padding:4px 10px;font-size:11px;border-radius:999px;color:var(--mute);letter-spacing:0.06em}
+  .nav .switch button.on{background:var(--ink);color:var(--paper)}
+
+  /* === ヒーロー === */
+  .hero{padding:96px 0 80px;border-bottom:1px solid var(--rule)}
+  .hero .kicker{font-size:11px;letter-spacing:0.18em;color:var(--mute);text-transform:uppercase;margin-bottom:36px;display:flex;gap:10px;align-items:center}
+  .hero .kicker .dot{width:5px;height:5px;background:var(--accent);border-radius:50%}  .hero h1{
+    font-weight:300;letter-spacing:-0.02em;
+    font-size:clamp(44px,6.4vw,96px);
+    line-height:1.05;max-width:18ch;
+  }
+  .hero h1 em{font-style:normal;color:var(--mute)}
+  .hero .sub{
+    margin-top:40px;max-width:56ch;
+    font-size:17px;color:var(--ink-2);line-height:1.75;
+  }
+  .hero .sig{margin-top:40px;display:flex;gap:28px;flex-wrap:wrap;align-items:baseline;color:var(--mute)}
+  .hero .sig span{display:inline-flex;align-items:baseline;gap:10px}
+  .hero .sig b{color:var(--ink);font-weight:500;font-size:36px;letter-spacing:-0.02em;line-height:1}
+  .hero .sig small{color:var(--ink-2);font-size:13px;letter-spacing:0.04em;text-transform:none}
+  .hero .sig .sep{color:var(--rule);margin:0 6px;align-self:center;font-size:13px}
+
+  /* === セクションヘッダ === */
+  .section-head{
+    display:grid;grid-template-columns:1fr auto;gap:24px;align-items:baseline;
+    padding:56px 0 24px;border-bottom:1px solid var(--rule);
+  }
+  .section-head .idx{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mute);letter-spacing:0.1em}
+  .section-head h2{font-weight:400;font-size:24px;letter-spacing:-0.01em}
+  .section-head .right{font-size:12px;color:var(--mute);letter-spacing:0.06em}
+
+  /* === WORKS : テキストリスト (共通) === */
+  .works{font-family:'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif}
+  .work-row{
+    display:grid;grid-template-columns:72px 1.2fr 2fr 1fr 140px;gap:32px;
+    align-items:baseline;padding:26px 0;border-bottom:1px solid var(--rule);
+    cursor:pointer;transition:background .25s ease;
+  }
+  .work-row:hover{background:var(--paper-2)}
+  .work-row .n{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mute);letter-spacing:0.1em;padding-top:4px}
+  .work-row .title{font-size:20px;letter-spacing:-0.01em;font-weight:400}
+  .work-row .desc{color:var(--mute);font-size:13px;line-height:1.6;padding-top:4px;max-width:52ch}
+  .work-row .tag{font-size:11px;color:var(--mute);letter-spacing:0.1em;text-transform:uppercase;padding-top:6px}
+  .work-row .year{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mute);text-align:right;padding-top:6px}
+  .work-row .arrow{display:inline-block;margin-left:10px;opacity:0;transform:translateX(-4px);transition:all .25s ease;color:var(--mute)}
+  .work-row:hover .arrow{opacity:1;transform:translateX(0)}
+
+  @media (max-width:900px){
+    .work-row{grid-template-columns:40px 1fr auto;gap:18px}
+    .work-row .desc, .work-row .tag{display:none}
+  }
+
+  /* === WORKS disclaimer === */
+  .works-disclaimer{
+    font-size:15px;color:var(--mute);line-height:1.8;
+    padding:22px 0 8px;border:0;
+    margin-bottom:8px;
+  }
+
+  /* === V2 : Generalized Case — 抽象サムネイル + 属性 === */
+  .works[data-view="V2"]{display:grid;grid-template-columns:1fr;gap:0}
+  .work-case{
+    display:grid;grid-template-columns:280px 1fr;gap:48px;
+    padding:36px 0;border:0;
+    color:var(--ink);text-decoration:none;align-items:start;
+  }
+  .work-case .thumb{
+    position:relative;aspect-ratio:4/3;
+    background:
+      linear-gradient(180deg, color-mix(in oklch, var(--accent) 8%, var(--paper-2)), var(--paper-2));
+    border:1px solid var(--rule);overflow:hidden;
+  }
+  .work-case .thumb-svg{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  }
+  .work-case .thumb-svg svg{width:100%;height:100%;color:var(--ink)}
+  .work-case .thumb-img{position:absolute;inset:0;border:1.5px dashed var(--rule)}
+  .work-case .thumb-meta{
+    position:absolute;left:17px;bottom:14px;
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;
+    color:var(--mute);text-transform:uppercase;
+  }
+  .case-body{padding-top:4px}
+  .case-title{font-size:22px;font-weight:300;letter-spacing:-0.01em;margin-bottom:18px;text-decoration:underline;text-underline-offset:4px;line-height:1.7}
+  .case-title .arrow{display:none}
+  .case-dl{
+    display:grid;grid-template-columns:72px 1fr;column-gap:20px;row-gap:8px;
+    font-size:13px;line-height:1.5;margin:0 0 18px;max-width:52ch;
+  }
+  .case-dl dt{color:var(--mute);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;padding-top:2px}
+  .case-dl dd{margin:0;color:var(--ink)}
+  .case-outcome{font-size:16px;line-height:1.8;color:var(--ink-2);max-width:52ch;margin:0;padding-top:0;border:0}
+  @media (max-width:720px){
+    .work-case{grid-template-columns:1fr;gap:20px}
+  }
+
+  /* === V4 : Card Grid === */
+  .works[data-view="V4"]{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--rule);border:1px solid var(--rule);
+    margin-top:0;
+  }
+  .work-card{
+    display:flex;flex-direction:column;
+    background:var(--paper);text-decoration:none;color:var(--ink);
+    transition:background .2s ease;
+  }
+  .work-card:hover{background:var(--paper-2)}
+  .work-card .card-thumb{
+    aspect-ratio:16/10;position:relative;overflow:hidden;
+    background:var(--ink);
+  }
+  .work-card .card-thumb .ct-noise{
+    position:absolute;inset:0;
+    background-image:
+      radial-gradient(ellipse 120% 80% at 30% 60%, color-mix(in oklch,var(--accent) 40%,var(--ink)) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 120% at 80% 20%, color-mix(in oklch, oklch(0.3 0.04 240) 60%, var(--ink)) 0%, transparent 60%);
+  }
+  .work-card .card-thumb .ct-grid{
+    position:absolute;inset:0;
+    background-image:
+      repeating-linear-gradient(90deg, transparent 0 47px, color-mix(in srgb,white 5%, transparent) 47px 48px),
+      repeating-linear-gradient(0deg, transparent 0 31px, color-mix(in srgb,white 5%, transparent) 31px 32px);
+  }
+  .work-card .card-thumb .ct-label{
+    position:absolute;top:17px;left:17px;
+    font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.18em;
+    text-transform:uppercase;color:rgba(255,255,255,0.45);
+  }
+  .work-card .card-thumb .ct-sector{
+    position:absolute;bottom:17px;right:17px;
+    font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.14em;
+    text-transform:uppercase;color:rgba(255,255,255,0.35);
+  }
+  .work-card .card-body{
+    flex:1;display:flex;flex-direction:column;
+    padding:22px 24px 20px;
+  }
+  .work-card .card-title{
+    font-size:17px;font-weight:500;letter-spacing:-0.01em;
+    line-height:1.35;margin-bottom:10px;
+  }
+  .work-card .card-question{
+    font-size:13px;color:var(--mute);line-height:1.65;
+    flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  .work-card .card-foot{
+    margin-top:18px;padding-top:14px;border-top:1px solid var(--rule);
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'JetBrains Mono',monospace;font-size:10px;
+    letter-spacing:0.1em;color:var(--mute);
+  }
+  .work-card .card-foot .dot{
+    width:6px;height:6px;border-radius:50%;background:var(--accent);
+    display:inline-block;margin-right:6px;flex-shrink:0;
+  }
+  .work-card .card-foot .cta{display:flex;align-items:center;gap:6px;color:var(--mute)}
+  .work-card .card-foot .cta.active{color:var(--ink)}
+  .work-card:hover .card-foot .cta.active{color:var(--accent)}
+  @media (max-width:900px){.works[data-view="V4"]{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:520px){.works[data-view="V4"]{grid-template-columns:1fr}}
+  .works[data-view="V3"]{display:block}
+  .work-narrative{
+    padding:40px 0;border-bottom:1px solid var(--rule);
+  }
+  .work-narrative .nh{
+    display:grid;grid-template-columns:72px 1fr;gap:32px;align-items:baseline;margin-bottom:24px;
+  }
+  .work-narrative .nh .n{
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mute);letter-spacing:0.1em;padding-top:8px;
+  }
+  .work-narrative .nh-main h3{
+    margin:0 0 6px;font-size:26px;font-weight:400;letter-spacing:-0.01em;line-height:1.3;
+  }
+  .work-narrative .nh-main .meta{
+    font-size:12px;color:var(--mute);letter-spacing:0.04em;
+  }
+  .work-narrative .nb{
+    display:grid;grid-template-columns:72px 1fr;gap:32px;
+  }
+  .work-narrative .nb .np-col{display:flex;flex-direction:column;gap:22px}
+  .work-narrative .np{padding-left:0}
+  .work-narrative .np-label{
+    font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mute);
+    letter-spacing:0.14em;text-transform:uppercase;margin-bottom:6px;
+  }
+  .work-narrative .np p{
+    margin:0;font-size:17px;line-height:1.9;max-width:56ch;
+    color:var(--ink);
+  }
+  .work-narrative .np:first-of-type p{
+    font-size:18px;font-weight:400;color:var(--ink);
+    font-family:'EB Garamond','Noto Serif JP',serif;font-style:italic;
+    letter-spacing:0.005em;
+  }
+  .work-narrative .np-cta{margin-top:6px}
+  .case-cta{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.08em;
+    color:var(--ink);text-decoration:none;
+    padding:10px 0;border-top:1px solid var(--rule);
+  }
+  .case-cta .arrow{transition:transform .25s ease;display:inline-block}
+  .case-cta:hover{color:var(--accent)}
+  .case-cta:hover .arrow{transform:translateX(4px)}
+  .case-cta.is-soon{color:var(--mute);border-top-style:dashed}
+  a.work-narrative{display:block;color:inherit;text-decoration:none;transition:background .25s ease}
+  a.work-narrative.is-card{cursor:pointer}
+  a.work-narrative.is-card:hover{background:var(--paper-2)}
+  a.work-narrative.is-card:hover .case-cta{color:var(--accent)}
+  a.work-narrative.is-card:hover .case-cta .arrow{transform:translateX(4px)}
+  @media (max-width:720px){
+    .work-narrative .nh, .work-narrative .nb{grid-template-columns:1fr;gap:12px}
+  }
+
+  /* === ABOUT === */
+  .about{padding:80px 0;border-bottom:1px solid var(--rule)}
+  .about-grid{display:grid;grid-template-columns:120px 1fr 1fr;gap:48px}
+  .about h3{font-weight:300;font-size:40px;line-height:1.2;letter-spacing:-0.02em;max-width:20ch}
+  .about .body p{margin-bottom:20px;color:var(--ink-2);max-width:50ch}
+  .about dl{display:grid;grid-template-columns:140px 1fr;gap:12px 17px;font-size:13px;margin-top:24px;border-top:1px solid var(--rule);padding-top:20px}
+  .about dt{color:var(--mute);letter-spacing:0.06em;font-size:11px;text-transform:uppercase}
+  .about dd{color:var(--ink-2)}
+  @media (max-width:900px){ .about-grid{grid-template-columns:1fr} }
+  .about-links{margin-top:24px;display:flex;gap:32px;flex-wrap:wrap;font-size:13px;color:var(--ink-2);letter-spacing:0.04em;border-top:1px solid var(--rule);padding-top:20px}
+  .about-links a{text-decoration:underline;text-underline-offset:3px;color:var(--ink-2)}
+  .about-links a:hover{color:var(--ink)}
+
+  /* === CONTACT === */
+  .contact{padding:120px 0 80px}
+  .contact .big{font-weight:300;font-size:clamp(40px,5vw,72px);line-height:1.1;letter-spacing:-0.02em;max-width:20ch}
+  .contact .big a{border-bottom:1px solid var(--ink);padding-bottom:6px}
+  .contact .big a:hover{color:var(--accent);border-color:var(--accent)}
+  .contact .links{margin-top:56px;display:flex;gap:40px;flex-wrap:wrap;font-size:13px;color:var(--ink-2);letter-spacing:0.04em}
+  .contact .links a{border-bottom:1px solid var(--rule);padding-bottom:2px}
+
+  /* === フッター === */
+  footer{border-top:1px solid var(--rule);padding:32px 0 60px;font-size:11px;color:var(--mute);letter-spacing:0.08em;display:flex;justify-content:space-between}
+
+  /* === HERO VISUAL (H6 用) === */
+  .hero-visual{
+    position:relative;width:100%;aspect-ratio:21/9;margin-top:0;
+    background:url('hero.jpg') center center / cover no-repeat;
+    overflow:hidden;border-bottom:1px solid var(--rule);
+  }
+  .hero-visual::before{
+    content:"";position:absolute;inset:0;
+    background-image:repeating-linear-gradient(90deg, transparent 0 96px, color-mix(in srgb, var(--ink) 4%, transparent) 96px 97px);
+    opacity:0.55;
+  }
+  .hero-visual .horizon{position:absolute;left:0;right:0;top:72%;height:1px;background:color-mix(in srgb,var(--ink) 16%,transparent)}
+  .hero-visual .figure{position:absolute;left:58%;top:70%;width:6px;height:6px;border-radius:50%;background:var(--ink);opacity:0.85;transform:translate(-50%,-100%)}
+  .hero-visual .placeholder-note{display:none}
+  .hero-visual .stamp{position:absolute;right:24px;top:17px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:0.18em;border:1px solid var(--accent);padding:3px 8px}
+  .hero-title-overlay{position:absolute;left:48px;top:50%;transform:translateY(-50%);color:#fff}
+  .hero-title-overlay .big{font-weight:500;letter-spacing:-0.02em;font-size:clamp(56px,8.4vw,140px);line-height:0.95;font-family:'Inter',sans-serif}
+  .hero-title-overlay .name{margin-top:14px;font-size:13px;letter-spacing:0.22em;color:rgba(255,255,255,0.75)}
+  .hero-visual .hero-stats{display:none}
+  .hero-visual .hero-stats span{display:inline-flex;align-items:baseline;gap:10px}
+  .hero-visual .hero-stats b{color:var(--ink);font-weight:500;font-size:36px;letter-spacing:-0.02em;line-height:1}
+  .hero-visual .hero-stats small{color:var(--ink-2);font-size:13px;letter-spacing:0.04em}
+  .hero-visual .hero-stats .sep{color:var(--rule);align-self:center;font-size:13px}
+  @media (max-width:720px){
+    .hero-visual .hero-stats{right:24px;bottom:24px;gap:12px}
+    .hero-visual .hero-stats b{font-size:24px}
+    .hero-title-overlay{left:24px;bottom:24px}
+  }
+
+  /* === PHILOSOPHY === */
+  .philos{padding:80px 0;border-bottom:1px solid var(--rule)}
+  .philos-grid{display:grid;grid-template-columns:120px repeat(3,1fr);gap:48px;margin-top:48px}
+  .philos-grid > .spacer{}
+  .philos-card h4{font-weight:500;font-size:22px;letter-spacing:-0.01em;margin-bottom:6px}
+  .philos-card .jp{color:var(--mute);font-size:12px;letter-spacing:0.06em;margin-bottom:28px}
+  .philos-card p{color:var(--ink-2);font-size:14px;line-height:1.75;max-width:32ch}
+  @media (max-width:900px){ .philos-grid{grid-template-columns:1fr} }
+
+  /* =========================================
+     === 案 A  "Swiss" : サンセリフ・グリッド ===
+     ========================================= */
+  body[data-scheme="A"]{
+    font-family:var(--font-en),var(--font-jp),sans-serif;
+  }
+  body[data-scheme="A"] .hero h1{font-weight:400;letter-spacing:-0.025em;font-size:clamp(44px,6vw,88px)}
+  body[data-scheme="A"] .work-row .title{font-family:'Inter','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;font-weight:500;letter-spacing:-0.01em}
+  body[data-scheme="A"] .about h3{font-weight:400}
+  body[data-scheme="A"] .section-head h2{font-weight:500;text-transform:uppercase;letter-spacing:0.08em;font-size:13px}
+
+  /* =========================================
+     === 案 B  "Editorial" : セリフ + 余白 ===
+     ========================================= */
+  body[data-scheme="B"] .hero{padding-bottom:96px}
+  body[data-scheme="B"] .hero h1{
+    font-family:'EB Garamond','Noto Serif JP',serif;
+    font-weight:400;font-style:italic;
+    letter-spacing:-0.01em;font-size:clamp(40px,4.6vw,72px);line-height:1.1;
+    max-width:20ch;margin-bottom:8px;
+  }
+  body[data-scheme="B"] .hero h1 em{
+    font-style:normal;color:var(--mute);display:block;margin-top:18px;
+    font-size:0.42em;letter-spacing:0.08em;text-transform:uppercase;
+    font-family:'Inter',sans-serif;font-weight:400;white-space:nowrap;
+  }
+  body[data-scheme="B"] .hero h1 .roman{font-style:normal;display:block}
+  body[data-scheme="B"] .hero .sub{margin-top:56px}
+  body[data-scheme="B"] .section-head h2{
+    font-family:'EB Garamond','Noto Serif JP',serif;font-style:italic;font-weight:400;font-size:28px;
+  }
+  body[data-scheme="B"] .work-row .title{
+    font-family:'EB Garamond','Noto Serif JP',serif;font-weight:400;font-size:24px;letter-spacing:0;
+  }
+  body[data-scheme="B"] .work-row{padding:32px 0}
+  body[data-scheme="B"] .about h3{
+    font-family:'EB Garamond','Noto Serif JP',serif;font-weight:400;font-style:italic;font-size:44px;
+  }
+  body[data-scheme="B"] .contact .big{font-family:'EB Garamond','Noto Serif JP',serif;font-style:italic;font-weight:400}
+
+  /* =========================================
+     === 案 C  "Display" : 超大型タイポ、縦組み ===
+     ========================================= */
+  body[data-scheme="C"] .hero{padding:72px 0 48px}
+  body[data-scheme="C"] .hero h1{
+    font-family:'Noto Serif JP','EB Garamond',serif;
+    font-weight:300;letter-spacing:-0.04em;
+    font-size:clamp(56px,11vw,180px);
+    line-height:0.94;max-width:none;
+  }
+  body[data-scheme="C"] .section-head h2{
+    font-size:clamp(36px,5vw,72px);font-weight:300;letter-spacing:-0.02em;
+  }
+  body[data-scheme="C"] .work-row{grid-template-columns:72px 1fr 1fr 120px;gap:24px}
+  body[data-scheme="C"] .work-row .title{
+    font-family:'Noto Serif JP',serif;font-weight:300;
+    font-size:clamp(28px,3.6vw,52px);letter-spacing:-0.02em;line-height:1.1;
+  }
+  body[data-scheme="C"] .work-row .desc{display:none}
+  body[data-scheme="C"] .work-row{padding:40px 0}
+  body[data-scheme="C"] .about h3{font-size:64px;font-weight:300;letter-spacing:-0.03em}
+  body[data-scheme="C"] .contact .big{font-size:clamp(56px,8vw,120px);font-weight:300;letter-spacing:-0.03em}
+
+  /* コモン: 細かい記号 */
+  .dot-sep{display:inline-block;width:3px;height:3px;background:var(--mute);border-radius:50%;margin:0 10px;vertical-align:middle}
+
+  /* Tweaksパネル */
+  .tweaks{
+    position:fixed;right:20px;bottom:20px;z-index:100;
+    background:var(--paper);border:1px solid var(--ink);padding:17px 18px;
+    font-size:12px;letter-spacing:0.04em;display:none;min-width:240px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.08);
+  }
+  .tweaks.show{display:block}
+  .tweaks h4{font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:var(--mute);margin-bottom:12px;font-weight:500}
+  .tweaks .row{display:flex;gap:6px;margin-bottom:10px}
+  .tweaks .row button{flex:1;padding:10px;border:1px solid var(--rule);font-size:11px;letter-spacing:0.08em;text-transform:uppercase}
+  .tweaks .row button.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .tweaks .note{color:var(--mute);font-size:10px;line-height:1.5;margin-top:8px}
+
+
+  /* === Hamburger & Mobile Menu === */
+  .burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:10px;background:none;border:0;cursor:pointer;position:relative;z-index:51;margin-right:-10px}
+  .burger span{display:block;width:22px;height:1.5px;background:var(--ink);transition:transform .3s ease, opacity .3s ease}
+  .nav-right{display:flex;align-items:center;justify-content:flex-end}
+  .mobile-menu{
+    display:none;position:fixed;inset:0;background:var(--paper);z-index:49;
+    flex-direction:column;justify-content:center;align-items:flex-start;
+    padding:48px;
+  }
+  .mobile-menu.open{display:flex}
+  .mobile-menu ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0}
+  .mobile-menu ul a{
+    font-size:clamp(36px,10vw,56px);font-weight:300;letter-spacing:-0.02em;
+    color:var(--ink);text-decoration:none;display:block;padding:12px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .mobile-menu ul a:hover{color:var(--mute)}
+  /* Nav stays above mobile menu */
+  .nav{z-index:50}
+
+  @media (max-width:720px){
+    .burger{display:flex}
+    #nav-links{display:none!important}
+    .nav{grid-template-columns:1fr auto!important}
+    .nav-right{display:flex;align-items:center}
+    .hero-title-overlay .big{font-size:clamp(32px,10vw,60px)!important}
+    .hero-title-overlay .name{font-size:10px;letter-spacing:0.12em;white-space:normal}
+    .hero-visual{aspect-ratio:4/3}
+    .hero{padding:48px 0 48px}
+    .hero .sub{font-size:14px;max-width:100%}
+  }
+
+  /* Thumb tones per case */
+  .work-case .thumb-img::after{content:"Undisclosed.";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:none;color:var(--mute);opacity:0.8}
+  .works a.work-case:nth-child(1) .thumb-img{background:color-mix(in oklch, oklch(0.75 0.06 240) 20%, var(--paper-2))}
+  .works a.work-case:nth-child(2) .thumb-img{background:color-mix(in oklch, oklch(0.75 0.05 160) 20%, var(--paper-2))}
+  .works a.work-case:nth-child(3) .thumb-img{background:color-mix(in oklch, oklch(0.75 0.06 30) 20%, var(--paper-2))}
+  .works a.work-case:nth-child(4) .thumb-img{background:color-mix(in oklch, oklch(0.75 0.05 300) 20%, var(--paper-2))}
+  .works a.work-case:nth-child(5) .thumb-img{background:color-mix(in oklch, oklch(0.75 0.05 60) 20%, var(--paper-2))}
+
+  h1, h2 {
+  font-family: var(--font-en), "Gen Interface JP Display", sans-serif;
+}
+</style>
+<template id="__bundler_thumbnail" data-bg-color="#f1f3f2">
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" fill="#f1f3f2"/>
+  <text x="600" y="420" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="180" font-weight="300" fill="#0e1416" letter-spacing="-4">U</text>
+</svg>
+</template>
+</head>
+<body data-scheme="A">
+
+<div class="page">
+
+  <!-- ===== NAV ===== -->
+  <nav class="nav" data-screen-label="Nav">
+    <div class="brand">
+      <span class="mark">Shinya Uogaeshi</span>
+      <span class="subt">undesigned</span>
+    </div>
+    <ul id="nav-links">
+      <li><a href="#works" class="current">Works</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="burger" id="burger" aria-label="メニュー" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <!-- Mobile menu overlay -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <ul>
+      <li><a href="#works">Works</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero" data-screen-label="Hero" style="padding: 45px 0px 80px">
+    <!-- Copy H1: 哲学 × 対話 — 現行 -->
+    <div class="hero-copy" data-copy="H1">
+      <h1>
+        <span class="roman">機能が形を</span>
+        <span class="roman">決定する。</span>
+        <em>Form follows function.</em>
+      </h1>
+      <p class="sub">
+        魚返 真哉（うおがえし しんや）と申します。Webアプリ・スマートフォンアプリの設計を中心に、金融・モビリティ等の領域でプロダクトに携わってきました。装飾ではなく、使う人の行為そのものを支える静かなインターフェースを目指しています。
+      </p>
+    </div>
+
+    <!-- Copy H2: 哲学 — 正面から -->
+    <div class="hero-copy" data-copy="H2" hidden>
+      <h1>
+        <span class="roman">足すよりも、</span>
+        <span class="roman">引くために。</span>
+        <em>Design as the art of subtraction.</em>
+      </h1>
+      <p class="sub">
+        魚返 真哉と申します。インターフェースを設計するということは、何を表示しないかを決めることとほぼ同義だと考えています。目立つ機能を足すより、不要な一行を消すことのほうが、長く使われる設計に近づくと信じています。
+      </p>
+    </div>
+
+    <!-- Copy H3: 問いかけ型 — 柔らかい -->
+    <div class="hero-copy" data-copy="H3" hidden>
+      <h1>
+        <span class="roman">その画面は、</span>
+        <span class="roman">誰のために</span>
+        <span class="roman">ありますか。</span>
+        <em>A quiet question, before every pixel.</em>
+      </h1>
+      <p class="sub">
+        魚返 真哉と申します。金融やモビリティといった、機能に責任が求められるプロダクトで、使う人の目的を丁寧にほどきほぐしながらUI/UXの設計をお手伝いしています。まず、何が違和感として残っているかを一緒に言語化するところから始めませんか。
+      </p>
+    </div>
+
+    <!-- Copy H4: 一言・短い宣言 -->
+    <div class="hero-copy" data-copy="H4" hidden>
+      <h1>
+        <span class="roman">静かに、</span>
+        <span class="roman">長く使われる</span>
+        <span class="roman">道具を。</span>
+        <em>Tools that age well, not ones that stand out.</em>
+      </h1>
+      <p class="sub">
+        魚返 真哉。金融・モビリティ領域を中心に、結果として目立たないデザインを設計しています。長期使用に耐える情報設計と、チームに引き継がれる設計根拠の両方を大切にしています。
+      </p>
+    </div>
+
+    <!-- Copy H5: 問いかけ型 — 直接的 -->
+    <div class="hero-copy" data-copy="H5" hidden>
+      <h1>
+        <span class="roman">何を見せないかを、</span>
+        <span class="roman">一緒に決めませんか。</span>
+        <em>Let’s decide what <u>not</u> to show.</em>
+      </h1>
+      <p class="sub">
+        魚返 真哉と申します。情報が多すぎる画面、選択肢が多すぎるフロー、目的がおねざりになったプロダクト。そういった問題に、金融・モビリティ領域での15年以上の実務経験から丁寧に向き合ってきました。
+      </p>
+    </div>
+
+    <!-- Copy H6: ビジュアル型 — ビッグタイポ + 写真プレースホルダー -->
+    <div class="hero-copy" data-copy="H6" data-no-sig hidden>
+      <div class="hero-visual" aria-label="背景写真プレースホルダー">
+        <div class="placeholder-note"><b>[ Landscape photo ]</b> &nbsp; — &nbsp; 広がりのある風景（差し替え可能）</div>
+        <div class="hero-title-overlay">
+          <div class="big" style="font-family: Inter">Portfolio</div>
+          <div class="name" style="font-family: Inter">SHINYA UOGAESHI &nbsp;·&nbsp; UI/UX DESIGNER</div>
+        </div>
+        <div class="hero-stats">
+          <span><b>15+</b> <small>年の実務</small></span>
+          <span class="sep">—</span>
+          <span><b>40+</b> <small>プロダクト</small></span>
+        </div>
+      </div>
+      <p class="sub" style="margin-top:48px">
+        魚返 真哉（うおがえし しんや）と申します。Webアプリ・スマートフォンアプリのUI/UX設計を中心に、金融・モビリティなどのさまざまな領域でプロダクトに携わってきました。装飾よりも使う人の行為そのものを支える静かなインターフェースを目指しています。
+      </p>
+    </div>
+
+    <div class="sig">
+      <span><b>15+</b> <small>年の実務</small></span>
+      <span class="sep">—</span>
+      <span><b>40+</b> <small>プロダクト</small></span>
+    </div>
+  </header>
+
+  <!-- ===== WORKS ===== -->
+  <section id="works" data-screen-label="Works">
+    <div class="section-head" style="border:0">
+            <h2 style="font-size: 17px">Selected Works</h2>
+      <span class="right"></span>
+    </div>
+    <p class="works-disclaimer" style="padding: 22px 0px 7px; margin: 0px">守秘義務のため取り組みの輪郭のみ掲載しています。詳細は<a href="#contact">お問い合わせ</a>後に個別にお伝えします。</p>
+    <div class="works" id="works-list"></div>
+  </section>
+
+  <!-- ===== PHILOSOPHY ===== -->
+  <section id="philosophy" class="philos" data-screen-label="Philosophy">
+    <div class="section-head" style="border-bottom:0;padding-bottom:0">
+            <h2 style="font-size: 15px">Philosophy</h2>
+      <span class="right"></span>
+    </div>
+        <div class="philos-grid">
+      <div class="spacer"></div>
+      <div class="philos-card">
+        <h4 style="font-size: 24px">Less But Better</h4>
+        <div class="jp" style="font-size: 15px">より少なく、しかしより良く</div>
+        <p style="font-size: 17px">足すことより引くこと。インダストリアルデザイナーであるディーター・ラムスの言葉に感化され、自身の目指す世界として常に心に置いています。</p>
+      </div>
+      <div class="philos-card">
+        <h4 style="font-size: 24px">Back and Forth</h4>
+        <div class="jp" style="font-size: 15px">往復</div>
+        <p style="font-size: 17px">手を動かしてつくった後に、はじめて言葉になることがあります。1pxの移動に「これだ」と感じる感覚は、言語化より先にある。つくることと言葉にすることを、行き来しながらデザインしています。</p>
+      </div>
+      <div class="philos-card">
+        <h4 style="font-size: 24px">Multiplex</h4>
+        <div class="jp" style="font-size: 15px">多重視点</div>
+        <p style="font-size: 17px">つくった直後に、ユーザー・クライアント・エンジニアと、複数の視点に切り替えて自分のアウトプットを見直します。自分の中に他者を持つことが、デザインの客観性につながると考えています。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section id="about" class="about" data-screen-label="About">
+    <div class="section-head" style="border-bottom:0;padding-bottom:0">
+            <h2 style="font-size: 17px">About</h2>
+      <span class="right"></span>
+    </div>
+        <div class="about-grid" style="margin-top:40px">
+      <div></div>
+      <div>
+        <h3>Keep Reframing.</h3>
+      </div>
+      <div class="body">
+        <p>Web制作会社・SIerを経て、2016年からUIデザイナーとして活動。スマートフォンアプリや業務Webアプリの設計・デザインに携わっています。</p>
+        <p>ある時期から、UIデザインという専門領域の輪郭を意識的にずらし始めました。芸術大学でデザイン史やコミュニケーションデザインを学びながら、社内ではデザイン共有会を主催するなど、作ることよりも「気づきを生む場」に手応えを感じています。</p>
+        <p>AIがデザインの多くを代替していく中で、自分にしかできないことは何か。その問いを持ちながら、角度を変えてデザインに迫り続けています。</p>
+        <dl>
+          <dt>Practice</dt><dd>UI/UX Design, Design Guideline</dd>
+          <dt>Methods</dt><dd>User Scenario, Screen Flow, Wireframing, Prototyping, Image Board</dd>
+          <dt>Based in</dt><dd>Osaka, Japan</dd>
+        </dl>
+        <div class="about-links">
+          <a href="https://x.com/wow_gaesh" target="_blank">X / Twitter ↗</a>
+          <!-- a href="#">Note ↗</a>
+          <a href="#">LinkedIn ↗</a -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" class="contact" data-screen-label="Contact">
+    <div class="section-head" style="border-bottom:0;padding-bottom:0;margin-bottom:48px">
+            <h2 style="font-size: 17px">Contact</h2>
+      <span class="right"></span>
+    </div>
+    <p class="big">
+      プロダクトの設計などでお手伝い出来る事があれば、<!-- a id="contact-email" href="mailto:wowgaesh@gmail.com">wowgaesh@gmail.com</a --><a href="https://docs.google.com/forms/d/e/1FAIpQLScMMqNrm9iHG4TBTZq2-ckbSUsB3eiNkb3ArrHecno_p_2JzQ/viewform?usp=header" target="_blank">お問い合わせフォーム</a> まで。
+    </p>
+  </section>
+
+  <footer>
+    <span>© 2026 Shinya Uogaeshi · undesigned</span>
+  </footer>
+</div>
+
+<!-- Tweaks panel -->
+<div class="tweaks" id="tweaks">
+  <h4>Typography Scheme</h4>
+  <div class="row" id="scheme-row">
+    <button data-scheme="A" class="active">A · Swiss</button>
+    <button data-scheme="B">B · Editorial</button>
+    <button data-scheme="C">C · Display</button>
+  </div>
+  <h4 style="margin-top:17px">Color Palette</h4>
+  <div class="row" id="palette-row" style="flex-wrap:wrap">
+    <button data-palette="P1" class="active">P1 · Warm</button>
+    <button data-palette="P2">P2 · Bauhaus</button>
+    <button data-palette="P3">P3 · Sumi</button>
+  </div>
+  <div class="row" style="flex-wrap:wrap">
+    <button data-palette="P4">P4 · Cool</button>
+    <button data-palette="P5">P5 · Shironeri</button>
+    <button data-palette="P6">P6 · Dark</button>
+  </div>
+  <h4 style="margin-top:17px">Hero Copy</h4>
+  <div class="row" id="copy-row" style="flex-wrap:wrap">
+    <button data-copy="H1" class="active">H1</button>
+    <button data-copy="H2">H2</button>
+    <button data-copy="H3">H3</button>
+    <button data-copy="H4">H4</button>
+    <button data-copy="H5">H5</button>
+    <button data-copy="H6">H6</button>
+  </div>
+  <div class="note">
+    H1 哲学×対話 / H2 引くデザイン / H3 問いかけ<br>
+    H4 長く使われる / H5 見せないもの / H6 写真+ビッグタイポ
+  </div>
+  <h4 style="margin-top:17px">Works View — 守秘下の見せ方</h4>
+  <div class="row" id="works-row" style="flex-wrap:wrap">
+    <button data-works="V1" class="active">V1 · Redacted List</button>
+    <button data-works="V2">V2 · Generalized Case</button>
+    <button data-works="V3">V3 · Process-First</button>
+    <button data-works="V4">V4 · Cards</button>
+  </div>
+  <div class="note">
+    V1 現表示に近い密閉リスト / V2 抽象サムネイル+属性一覧 / V3 問い→アプローチ→結果のナラティブ
+  </div>
+  <h4 style="margin-top:17px">Detail Link Style (V3 only)</h4>
+  <div class="row" id="link-row" style="flex-wrap:wrap">
+    <button data-link="link" class="active">A · Link only</button>
+    <button data-link="card">B · Whole card</button>
+  </div>
+  <div class="note">
+    A: 末尾の「Read full case」のみリンク / B: カード全体がクリッカブル
+  </div>
+  <h4 style="margin-top:17px">English Font</h4>
+  <div class="row" id="font-row">
+    <button data-font="Inter" class="active">Inter</button>
+    <button data-font="DM Sans">DM Sans</button>
+    <button data-font="Plus Jakarta Sans">Plus Jakarta</button>
+    <button data-font="-apple-system">SF Pro</button>
+  </div>
+</div>
+
+<script>
+/* ===== Works data — 守秘下の一般化ケーススタディ、厳選 5件 ===== */
+const WORKS = [
+  {n:"01",title:"釣果ログアプリのUX/UIデザイン",slug:"fishing",question:"釣果ログアプリのUX設計をリードし、要件定義からプロトタイプまでを一貫して担当。精緻なシナリオを描くことで、釣り船体験に自然に溶け込むアプリを目指した。",approach:"",outcome:"",tag:"",hasDetail:true},
+  {n:"02",title:"企業・業界分析プラットフォームのUI改善",slug:"platform",question:"企業・業界分析プラットフォームの継続的なUI改善を担当。スピード感を持ってビジュアルやプロトタイプに仕立て、ステークホルダーの意思決定を支えた。",approach:"",outcome:"",tag:"",hasDetail:true},
+  {n:"03",title:"プロスポーツチーム公式スマートフォンアプリ",slug:"prosports",question:"プロスポーツチームの公式スマートフォンアプリのリニューアルに参画。海外の開発会社からUIデザイン部分を切り出してアサインしてもらい、日本人向けのデザインと、プロジェクトチーム内のコミュニケーションの橋渡し役を担った。",approach:"",outcome:"",tag:"",hasDetail:false},
+  ]
+
+const list = document.getElementById('works-list');
+
+function renderV1(){
+  list.innerHTML = WORKS.map(w => `
+    <a class="work-row" href="#">
+      <span class="n">${w.n}</span>
+      <span class="title">${w.title}<span class="arrow">→</span></span>
+      <span class="desc">${w.question}</span>
+      <span class="tag">${w.tag}</span>
+      <span class="year">${w.year}</span>
+    </a>
+  `).join('');
+}
+
+/* Wireframe SVGs per case — abstract, sector-specific */
+const THUMBS = {
+  "01": `<svg viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Finance info service: data table + chart -->
+    <rect x="16" y="14" width="248" height="152" rx="2" stroke="currentColor" stroke-opacity=".15" stroke-width="1"/>
+    <!-- Header bar -->
+    <rect x="16" y="14" width="248" height="28" fill="currentColor" fill-opacity=".07"/>
+    <rect x="26" y="22" width="60" height="4" rx="1" fill="currentColor" fill-opacity=".4"/>
+    <rect x="96" y="22" width="30" height="4" rx="1" fill="currentColor" fill-opacity=".2"/>
+    <rect x="220" y="20" width="36" height="8" rx="1" fill="currentColor" fill-opacity=".25"/>
+    <!-- Sidebar nav -->
+    <rect x="16" y="42" width="56" height="124" fill="currentColor" fill-opacity=".04"/>
+    <rect x="24" y="52" width="36" height="4" rx="1" fill="currentColor" fill-opacity=".3"/>
+    <rect x="24" y="64" width="28" height="4" rx="1" fill="currentColor" fill-opacity=".2"/>
+    <rect x="24" y="76" width="32" height="4" rx="1" fill="currentColor" fill-opacity=".35"/>
+    <rect x="24" y="88" width="24" height="4" rx="1" fill="currentColor" fill-opacity=".2"/>
+    <!-- Main: chart area -->
+    <rect x="80" y="50" width="176" height="64" rx="1" fill="currentColor" fill-opacity=".04" stroke="currentColor" stroke-opacity=".12" stroke-width=".5"/>
+    <!-- Chart bars -->
+    <rect x="96" y="88" width="12" height="20" rx="1" fill="currentColor" fill-opacity=".2"/>
+    <rect x="114" y="76" width="12" height="32" rx="1" fill="currentColor" fill-opacity=".2"/>
+    <rect x="132" y="70" width="12" height="38" rx="1" fill="currentColor" fill-opacity=".3"/>
+    <rect x="150" y="80" width="12" height="28" rx="1" fill="currentColor" fill-opacity=".2"/>
+    <rect x="168" y="64" width="12" height="44" rx="1" fill="currentColor" fill-opacity=".35"/>
+    <rect x="186" y="72" width="12" height="36" rx="1" fill="currentColor" fill-opacity=".2"/>
+    <rect x="204" y="60" width="12" height="48" rx="1" fill="currentColor" fill-opacity=".28"/>
+    <rect x="222" y="68" width="12" height="40" rx="1" fill="currentColor" fill-opacity=".2"/>
+    <!-- Trend line -->
+    <polyline points="102,98 120,86 138,78 156,88 174,72 192,80 210,68 228,76" stroke="currentColor" stroke-opacity=".5" stroke-width="1.5" fill="none"/>
+    <!-- Table -->
+    <rect x="80" y="122" width="176" height="6" rx="1" fill="currentColor" fill-opacity=".07"/>
+    <rect x="80" y="132" width="176" height="6" rx="1" fill="currentColor" fill-opacity=".07"/>
+    <rect x="80" y="142" width="176" height="6" rx="1" fill="currentColor" fill-opacity=".07"/>
+    <rect x="80" y="122" width="56" height="26" fill="currentColor" fill-opacity=".05"/>
+    <rect x="80" y="122" width="176" height="1" fill="currentColor" fill-opacity=".2"/>
+  </svg>`,
+
+  "02": `<svg viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- EV charging app: mobile + big number -->
+    <!-- Phone outline -->
+    <rect x="92" y="10" width="96" height="160" rx="12" stroke="currentColor" stroke-opacity=".25" stroke-width="1.5"/>
+    <rect x="98" y="20" width="84" height="140" rx="8" fill="currentColor" fill-opacity=".04"/>
+    <!-- Status bar -->
+    <rect x="112" y="12" width="36" height="6" rx="3" fill="currentColor" fill-opacity=".2"/>
+    <!-- Big number: 残り時間 -->
+    <text x="140" y="72" text-anchor="middle" font-size="32" font-weight="300" fill="currentColor" fill-opacity=".6" font-family="'JetBrains Mono', monospace">18</text>
+    <text x="140" y="86" text-anchor="middle" font-size="9" fill="currentColor" fill-opacity=".3" font-family="sans-serif" letter-spacing="2">MIN LEFT</text>
+    <!-- Circular progress -->
+    <circle cx="140" cy="73" r="38" stroke="currentColor" stroke-opacity=".1" stroke-width="4" fill="none"/>
+    <circle cx="140" cy="73" r="38" stroke="currentColor" stroke-opacity=".45" stroke-width="4" fill="none"
+      stroke-dasharray="168 72" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 140 73)"/>
+    <!-- Cost row -->
+    <rect x="106" y="118" width="68" height="8" rx="2" fill="currentColor" fill-opacity=".15"/>
+    <rect x="108" y="120" width="28" height="4" rx="1" fill="currentColor" fill-opacity=".4"/>
+    <rect x="140" y="120" width="22" height="4" rx="1" fill="currentColor" fill-opacity=".25"/>
+    <!-- CTA -->
+    <rect x="108" y="132" width="64" height="18" rx="4" fill="currentColor" fill-opacity=".12"/>
+    <rect x="120" y="138" width="40" height="4" rx="1" fill="currentColor" fill-opacity=".35"/>
+  </svg>`,
+
+  "03": `<svg viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Transit map: grid + route lines + stops -->
+    <!-- Background grid -->
+    <rect x="0" y="0" width="280" height="180" fill="currentColor" fill-opacity=".02"/>
+    <line x1="0" y1="36" x2="280" y2="36" stroke="currentColor" stroke-opacity=".07"/>
+    <line x1="0" y1="72" x2="280" y2="72" stroke="currentColor" stroke-opacity=".07"/>
+    <line x1="0" y1="108" x2="280" y2="108" stroke="currentColor" stroke-opacity=".07"/>
+    <line x1="0" y1="144" x2="280" y2="144" stroke="currentColor" stroke-opacity=".07"/>
+    <line x1="56" y1="0" x2="56" y2="180" stroke="currentColor" stroke-opacity=".07"/>
+    <line x1="112" y1="0" x2="112" y2="180" stroke="currentColor" stroke-opacity=".07"/>
+    <line x1="168" y1="0" x2="168" y2="180" stroke="currentColor" stroke-opacity=".07"/>
+    <line x1="224" y1="0" x2="224" y2="180" stroke="currentColor" stroke-opacity=".07"/>
+    <!-- Route A (horizontal) -->
+    <line x1="20" y1="72" x2="260" y2="72" stroke="currentColor" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>
+    <!-- Route B (diagonal) -->
+    <line x1="56" y1="144" x2="224" y2="36" stroke="currentColor" stroke-opacity=".25" stroke-width="3" stroke-linecap="round"/>
+    <!-- Route C (vertical segment) -->
+    <line x1="168" y1="36" x2="168" y2="144" stroke="currentColor" stroke-opacity=".2" stroke-width="3" stroke-linecap="round"/>
+    <!-- Stops -->
+    <circle cx="56" cy="72" r="5" fill="currentColor" fill-opacity=".7"/>
+    <circle cx="112" cy="72" r="5" fill="currentColor" fill-opacity=".5"/>
+    <circle cx="168" cy="72" r="7" fill="currentColor" fill-opacity=".9" stroke="currentColor" stroke-opacity=".3" stroke-width="2"/>
+    <circle cx="224" cy="72" r="5" fill="currentColor" fill-opacity=".5"/>
+    <circle cx="168" cy="108" r="5" fill="currentColor" fill-opacity=".4"/>
+    <!-- Alert badge -->
+    <rect x="155" y="56" width="26" height="12" rx="6" fill="currentColor" fill-opacity=".2"/>
+    <text x="168" y="65" text-anchor="middle" font-size="7" fill="currentColor" fill-opacity=".7" font-family="monospace" letter-spacing="1">ALERT</text>
+    <!-- Labels -->
+    <rect x="20" y="18" width="32" height="5" rx="1" fill="currentColor" fill-opacity=".2"/>
+    <rect x="20" y="28" width="24" height="4" rx="1" fill="currentColor" fill-opacity=".15"/>
+  </svg>`,
+
+  "04": `<svg viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Dark-mode car inspection app: phone, dark bg, large tap targets -->
+    <rect x="0" y="0" width="280" height="180" fill="currentColor" fill-opacity=".06" rx="2"/>
+    <!-- Phone -->
+    <rect x="88" y="8" width="104" height="164" rx="14" fill="currentColor" fill-opacity=".08" stroke="currentColor" stroke-opacity=".3" stroke-width="1.5"/>
+    <rect x="94" y="18" width="92" height="144" rx="8" fill="currentColor" fill-opacity=".06"/>
+    <!-- Notch -->
+    <rect x="118" y="10" width="44" height="6" rx="3" fill="currentColor" fill-opacity=".3"/>
+    <!-- Header -->
+    <rect x="100" y="28" width="80" height="5" rx="1" fill="currentColor" fill-opacity=".2"/>
+    <!-- Large tap buttons — emphasizing big touch targets -->
+    <rect x="100" y="44" width="80" height="34" rx="6" fill="currentColor" fill-opacity=".15" stroke="currentColor" stroke-opacity=".2"/>
+    <rect x="100" y="84" width="80" height="34" rx="6" fill="currentColor" fill-opacity=".1" stroke="currentColor" stroke-opacity=".15"/>
+    <rect x="100" y="124" width="80" height="24" rx="6" fill="currentColor" fill-opacity=".2"/>
+    <!-- Labels inside buttons -->
+    <rect x="112" y="57" width="56" height="5" rx="1" fill="currentColor" fill-opacity=".5"/>
+    <rect x="116" y="97" width="48" height="5" rx="1" fill="currentColor" fill-opacity=".4"/>
+    <rect x="112" y="133" width="40" height="4" rx="1" fill="currentColor" fill-opacity=".6"/>
+    <!-- Contrast indicator marks -->
+    <circle cx="96" cy="44" r="3" fill="currentColor" fill-opacity=".0"/>
+  </svg>`,
+
+  "05": `<svg viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Enterprise dashboard: sidebar + content + density -->
+    <!-- Window chrome -->
+    <rect x="8" y="8" width="264" height="164" rx="3" stroke="currentColor" stroke-opacity=".15" stroke-width="1"/>
+    <rect x="8" y="8" width="264" height="22" fill="currentColor" fill-opacity=".06"/>
+    <circle cx="20" cy="19" r="3.5" fill="currentColor" fill-opacity=".2"/>
+    <circle cx="30" cy="19" r="3.5" fill="currentColor" fill-opacity=".2"/>
+    <circle cx="40" cy="19" r="3.5" fill="currentColor" fill-opacity=".2"/>
+    <!-- Sidebar -->
+    <rect x="8" y="30" width="52" height="142" fill="currentColor" fill-opacity=".04"/>
+    <rect x="16" y="40" width="36" height="4" rx="1" fill="currentColor" fill-opacity=".3"/>
+    <rect x="16" y="50" width="28" height="4" rx="1" fill="currentColor" fill-opacity=".4"/>
+    <rect x="16" y="60" width="32" height="4" rx="1" fill="currentColor" fill-opacity=".2"/>
+    <rect x="16" y="70" width="30" height="4" rx="1" fill="currentColor" fill-opacity=".2"/>
+    <rect x="16" y="80" width="26" height="4" rx="1" fill="currentColor" fill-opacity=".3"/>
+    <!-- Main content: dense rows -->
+    <rect x="66" y="36" width="196" height="4" rx="1" fill="currentColor" fill-opacity=".12"/>
+    <rect x="66" y="44" width="196" height="4" rx="1" fill="currentColor" fill-opacity=".2"/>
+    <rect x="66" y="52" width="196" height="4" rx="1" fill="currentColor" fill-opacity=".12"/>
+    <rect x="66" y="60" width="196" height="4" rx="1" fill="currentColor" fill-opacity=".2"/>
+    <rect x="66" y="68" width="196" height="4" rx="1" fill="currentColor" fill-opacity=".12"/>
+    <rect x="66" y="76" width="160" height="4" rx="1" fill="currentColor" fill-opacity=".15"/>
+    <!-- Divider -->
+    <line x1="66" y1="90" x2="262" y2="90" stroke="currentColor" stroke-opacity=".12"/>
+    <!-- Second block: cards -->
+    <rect x="66" y="98" width="88" height="56" rx="2" fill="currentColor" fill-opacity=".05" stroke="currentColor" stroke-opacity=".12"/>
+    <rect x="74" y="106" width="44" height="4" rx="1" fill="currentColor" fill-opacity=".3"/>
+    <rect x="74" y="114" width="64" height="4" rx="1" fill="currentColor" fill-opacity=".15"/>
+    <rect x="74" y="130" width="36" height="12" rx="2" fill="currentColor" fill-opacity=".15"/>
+    <rect x="162" y="98" width="100" height="56" rx="2" fill="currentColor" fill-opacity=".05" stroke="currentColor" stroke-opacity=".12"/>
+    <rect x="170" y="106" width="52" height="4" rx="1" fill="currentColor" fill-opacity=".3"/>
+    <rect x="170" y="114" width="72" height="4" rx="1" fill="currentColor" fill-opacity=".15"/>
+    <rect x="170" y="130" width="40" height="12" rx="2" fill="currentColor" fill-opacity=".15"/>
+    <!-- Bottom row -->
+    <rect x="66" y="160" width="196" height="4" rx="1" fill="currentColor" fill-opacity=".1"/>
+  </svg>`
+};
+
+function renderV2(){
+  list.innerHTML = WORKS.map(w => {
+    const href = `works/${w.slug}.html`;
+    return `<a class="work-case" href="${href}">
+      <div class="thumb" aria-hidden="true">
+        <div class="thumb-img" aria-label="画像プレースホルダー"></div>
+        <div class="thumb-meta">${w.n}</div>
+      </div>
+      <div class="case-body">
+        <div class="case-title">${w.title}<span class="arrow">→</span></div>
+        <p class="case-outcome">${w.question}</p>
+      </div>
+    </a>`;
+  }).join('');
+}
+function renderV3(){
+  const link = document.body.getAttribute('data-link-style') || 'link';
+  list.innerHTML = WORKS.map(w => {
+    const href = w.hasDetail ? `works/${w.slug}.html` : '#';
+    const cta = w.hasDetail
+      ? `<a class="case-cta" href="${href}">Read full case <span class="arrow">→</span></a>`
+      : `<span class="case-cta is-soon">Full case writing · coming soon</span>`;
+    const inner = `
+      <header class="nh">
+        <span class="n">${w.n}</span>
+        <div class="nh-main">
+          <h3>${w.title}</h3>
+          <span class="meta">${w.year} &nbsp;·&nbsp; ${w.sector} &nbsp;·&nbsp; ${w.role}</span>
+        </div>
+      </header>
+      <div class="nb">
+        <div></div>
+        <div class="np-col">
+          <div class="np"><div class="np-label">問い / Question</div><p>${w.question}</p></div>
+          <div class="np"><div class="np-label">アプローチ / Approach</div><p>${w.approach}</p></div>
+          <div class="np"><div class="np-label">結果 / Outcome</div><p>${w.outcome}</p></div>
+          <div class="np np-cta">${cta}</div>
+        </div>
+      </div>`;
+    if(link === 'card' && w.hasDetail){
+      return `<a class="work-narrative is-card" href="${href}">${inner}</a>`;
+    }
+    return `<article class="work-narrative">${inner}</article>`;
+  }).join('');
+}
+
+function renderV4(){
+  list.innerHTML = WORKS.map(w => {
+    const href = w.hasDetail ? `works/${w.slug}.html` : '#';
+    const ctaClass = w.hasDetail ? 'cta active' : 'cta';
+    const ctaText = w.hasDetail ? 'Read case →' : 'Coming soon';
+    return `<a class="work-card" href="${w.hasDetail ? href : 'javascript:void(0)'}" ${!w.hasDetail ? 'tabindex="-1" aria-disabled="true"' : ''}>
+      <div class="card-thumb">
+        <div class="ct-noise"></div>
+        <div class="ct-grid"></div>
+        <div class="ct-label">${w.n}</div>
+        <div class="ct-sector">${w.sector}</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">${w.title}</div>
+        <p class="card-question">${w.question}</p>
+        <div class="card-foot">
+          <span class="${ctaClass}"><span class="dot"></span>${ctaText}</span>
+          <span>${w.year}</span>
+        </div>
+      </div>
+    </a>`;
+  }).join('');
+}
+
+function applyWorks(v){
+  list.setAttribute('data-view', v);
+  if(v==='V1') renderV1();
+  else if(v==='V2') renderV2();
+  else if(v==='V4') renderV4();
+  else renderV3();
+  document.querySelectorAll('#works-row button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.works===v);
+  });
+}
+
+/* ===== Active nav ===== */
+(function(){
+  const navLinks = {};
+  let scrollLocked = false;
+  document.querySelectorAll('.nav ul a').forEach(a=>{
+    const href = a.getAttribute('href');
+    if(href && href.startsWith('#')) navLinks[href.slice(1)] = a;
+    a.addEventListener('click', ()=>{
+      Object.values(navLinks).forEach(x=>x.classList.remove('current'));
+      a.classList.add('current');
+      scrollLocked = true;
+      clearTimeout(window._navLockTimer);
+      window._navLockTimer = setTimeout(()=>{ scrollLocked = false; }, 1200);
+    });
+  });
+  function setActive(id){
+    if(!navLinks[id]) return;
+    Object.values(navLinks).forEach(a=>a.classList.remove('current'));
+    navLinks[id].classList.add('current');
+  }
+  const sectionIds = ['contact','about','philosophy','works'];
+  function onScroll(){
+    if(scrollLocked) return;
+    const threshold = 160;
+    for(const id of sectionIds){
+      const el=document.getElementById(id);
+      if(el){ const rect=el.getBoundingClientRect(); if(rect.top <= threshold){ setActive(id==='philosophy'?'works':id); return; } }
+    }
+    setActive('works');
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+})();
+
+
+
+/* ===== Tweaks mode ===== */
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "scheme": "A",
+  "palette": "P4",
+  "copy": "H6",
+  "works": "V2",
+  "link": "link",
+  "font": "Inter"
+}/*EDITMODE-END*/;
+
+function applyScheme(s){
+  document.body.setAttribute('data-scheme', s);
+  document.querySelectorAll('#scheme-row button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.scheme===s);
+  });
+}
+function applyPalette(p){
+  document.body.setAttribute('data-palette', p);
+  document.querySelectorAll('#palette-row button, .tweaks button[data-palette]').forEach(b=>{
+    b.classList.toggle('active', b.dataset.palette===p);
+  });
+}
+applyScheme(TWEAK_DEFAULTS.scheme || 'A');
+applyPalette(TWEAK_DEFAULTS.palette || 'P1');
+
+function applyCopy(c){
+  document.querySelectorAll('.hero-copy').forEach(el=>{
+    el.hidden = el.dataset.copy !== c;
+  });
+  // H6 is self-contained (stats are in the hero visual) — hide the shared sig row.
+  const sig = document.querySelector('.hero > .sig');
+  if(sig) sig.style.display = (c === 'H6') ? 'none' : '';
+  document.querySelectorAll('#copy-row button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.copy===c);
+  });
+}
+applyCopy(TWEAK_DEFAULTS.copy || 'H1');
+function applyLink(l){
+  document.body.setAttribute('data-link-style', l);
+  document.querySelectorAll('#link-row button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.link===l);
+  });
+  const cur = list.getAttribute('data-view');
+  if(cur==='V3') renderV3();
+}
+applyLink(TWEAK_DEFAULTS.link || 'link');
+function applyFont(f){
+  document.documentElement.style.setProperty('--font-en', '"' + f + '"');
+  document.querySelectorAll('#font-row button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.font===f);
+  });
+}
+applyFont(TWEAK_DEFAULTS.font || 'Inter');
+applyWorks(TWEAK_DEFAULTS.works || 'V1');
+
+window.addEventListener('message',(e)=>{
+  const d = e.data || {};
+  if(d.type==='__activate_edit_mode'){document.getElementById('tweaks').classList.add('show');document.body.classList.add('edit-active');}
+  if(d.type==='__deactivate_edit_mode'){document.getElementById('tweaks').classList.remove('show');document.body.classList.remove('edit-active');}
+});
+window.parent.postMessage({type:'__edit_mode_available'}, '*');
+
+document.getElementById('scheme-row').addEventListener('click',(e)=>{
+  const btn = e.target.closest('button'); if(!btn) return;
+  const s = btn.dataset.scheme;
+  applyScheme(s);
+  window.parent.postMessage({type:'__edit_mode_set_keys', edits:{scheme:s}}, '*');
+});
+document.getElementById('tweaks').addEventListener('click',(e)=>{
+  const pb = e.target.closest('button[data-palette]');
+  if(pb){
+    const p = pb.dataset.palette;
+    applyPalette(p);
+    window.parent.postMessage({type:'__edit_mode_set_keys', edits:{palette:p}}, '*');
+    return;
+  }
+  const cb = e.target.closest('button[data-copy]');
+  if(cb){
+    const c = cb.dataset.copy;
+    applyCopy(c);
+    window.parent.postMessage({type:'__edit_mode_set_keys', edits:{copy:c}}, '*');
+  }
+  const wb = e.target.closest('button[data-works]');
+  if(wb){
+    const v = wb.dataset.works;
+    applyWorks(v);
+    window.parent.postMessage({type:'__edit_mode_set_keys', edits:{works:v}}, '*');
+  }
+  const lb = e.target.closest('button[data-link]');
+  if(lb){
+    const l = lb.dataset.link;
+    applyLink(l);
+    window.parent.postMessage({type:'__edit_mode_set_keys', edits:{link:l}}, '*');
+  }
+  const fb = e.target.closest('button[data-font]');
+  if(fb){
+    const f = fb.dataset.font;
+    applyFont(f);
+    window.parent.postMessage({type:'__edit_mode_set_keys', edits:{font:f}}, '*');
+  }
+});
+
+/* Hamburger menu */
+(function(){
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('mobile-menu');
+  if(!burger || !menu) return;
+  function closeMenu(){
+    burger.classList.remove('open');
+    menu.classList.remove('open');
+    burger.setAttribute('aria-expanded','false');
+    menu.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+  }
+  burger.addEventListener('click',()=>{
+    const isOpen = menu.classList.toggle('open');
+    burger.classList.toggle('open', isOpen);
+    burger.setAttribute('aria-expanded', isOpen);
+    menu.setAttribute('aria-hidden', !isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+})();
+
+/* Email obfuscation */
+(function(){
+  const u='wowgaesh'; const d='gmail.com';
+  const el=document.getElementById('contact-email');
+  if(el){ el.href='mailto:'+u+'@'+d; el.textContent=u+'@'+d; }
+})();
+</script>
+</body>
+</html>
